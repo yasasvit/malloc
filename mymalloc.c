@@ -30,6 +30,7 @@ void* coalesce(char* ptr1, char* ptr2) {
 }
 
 
+
 void *mymalloc(size_t size, char *file, int line) {
    if (size < 1 || size > 4096) {
        printf("Requests for too much memory on this file %s from line %d", file, line);
