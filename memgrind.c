@@ -5,8 +5,9 @@
 #include<time.h>
 #include "mymalloc.h"
 
+// 1. malloc() and immediately free() a 1-byte chunk, 120 times.
+
 double test1() {
-    // 1. malloc() and immediately free() a 1-byte chunk, 120 times.
     time_t start = time(NULL);
     for (int i = 0; i < 120; i++) {
         char* temp = malloc(1);
@@ -15,9 +16,10 @@ double test1() {
     return difftime(time(NULL), start);
 }
 
+// 2. Use malloc() to get 120 1-byte chunks, storing the pointers in an array, then use free() to
+//    deallocate the chunks. 
+
 double test2() {
-    /* 2. Use malloc() to get 120 1-byte chunks, storing the pointers in an array, then use free() to
-deallocate the chunks. */ 
     time_t start = time(NULL);
     char* temp[120];
     for (int i = 0; i < 120; i++) {
@@ -42,6 +44,7 @@ double test3() {
     int i = 0;
     while (count < 120) {
         int n = (rand() % 2); 
+
         if (n == 0) { // 
             temp[i] = malloc(1);
             i += 1; 
@@ -57,9 +60,48 @@ double test3() {
     return difftime(time(NULL), start); 
 }
 
+// Stress Test 1 -> Look at README.md for more info
+double stressTest1() {
+    time_t start = time(NULL);
+    char* temp[1000];
+    int index = 0;
+    int size = 0;
+    for (int i = 0; i < 1000; i++) {
+        int s = rand() % 100 + 1; // Generates random number from 1 to 100
+        if (s + size > 1000) {
+            break;
+        }
+        temp[i] = malloc(s);
+        size += s;
+        index += 1;
+    } 
+    
+    for (int i = 0; i <= index; i++) {
+        free(temp[i]);
+    }
+
+    return difftime(time(NULL), start); 
+
+}
+
+// Stress Test 2 -> Look at README.md for more info
+double stressTest2() {
+    time_t start = time(NULL);
+    char * ptr;
+    for (int i = 0; i <= 9999; i++) {
+        if (i % 2 == 0) {
+            int temp = rand() * 1000 + 1;
+            ptr = malloc(temp);
+        } else {
+            free(ptr);
+        }
+    }
+    return difftime(time(NULL), start); 
+}
+
 int err() {
     int x, *p;
-    int test = 1;
+    int test = 3;
     
     switch (test) {
     default:
@@ -90,4 +132,7 @@ int main() {
     // printf("%f\n", test2());
     // printf("%f\n", test3());
     err();
+    // printf("%f\n", stressTest1());
+    // printf("%f\n", stressTest2());
+
 }
