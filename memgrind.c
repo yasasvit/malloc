@@ -5,33 +5,29 @@
 #include<time.h>
 #include "mymalloc.h"
 
-int main() {
-
-}
-
-long long test1() {
+double test1() {
     // 1. malloc() and immediately free() a 1-byte chunk, 120 times.
-    struct timeval start;
-    gettimeofday(&start, NULL);
+    time_t start = time(NULL);
     for (int i = 0; i < 120; i++) {
-        char* temp = mymalloc(1);
+        char* temp = malloc(1);
         free(temp);
     }
-    struct timeval end;
-    gettimeofday(&end, NULL);
-    return (long long) (end.tv_sec - start.tv_sec); 
+    return difftime(time(NULL), start);
 }
 
-long long test2() {
+double test2() {
     /* 2. Use malloc() to get 120 1-byte chunks, storing the pointers in an array, then use free() to
 deallocate the chunks. */ 
+    time_t start = time(NULL);
     char* temp[120];
     for (int i = 0; i < 120; i++) {
         temp[i] = malloc(1); // do we need to cast? 
     }
     for (int i = 0; i < 120; i++) {
-        free(malloc[i]);
+        free(temp[i]);
     }
+    return difftime(time(NULL), start);
+
 }
 
 // 3. Randomly choose between
@@ -39,10 +35,9 @@ deallocate the chunks. */
 // •Deallocating one of the chunks in the array (if any)
 // Repeat until you have called malloc() 120 times, then free all remaining allocated chunks.
 
-long long test3() {
+double test3() {
     int count = 0;
-    struct timeval start;
-    gettimeofday(&start, NULL);
+    time_t start = time(NULL);
     char* temp[120];
     int i = 0;
     while (count < 120) {
@@ -50,17 +45,49 @@ long long test3() {
         if (n == 0) { // 
             temp[i] = malloc(1);
             i += 1; 
-            count += 1
+            count++;
         } else { // free
-            if (count > 0) {
+            if (i > 0) {
                 free(temp[i - 1]);
-                i -= 1
+                i--;
             }
         }
 
     }
+    return difftime(time(NULL), start); 
+}
 
-    struct timeval end;
-    gettimeofday(&end, NULL);
-    return (long long) (end.tv_sec - start.tv_sec); 
+int err() {
+    int x, *p;
+    int test = 1;
+    
+    switch (test) {
+    default:
+        puts("Missing or invalid test number");
+        return EXIT_FAILURE;
+    
+    case 1:
+        free(&x);
+        break;
+    case 2:
+        p = (int *) malloc(sizeof(int) * 10);
+        free(p + 1);
+        break;
+    
+    case 3:
+        p = (int *) malloc(sizeof(int) * 10);
+        free(p);
+        free(p);
+        break;
+    }
+    
+    return EXIT_SUCCESS;
+
+}
+
+int main() {
+    // printf("%f\n", test1());
+    // printf("%f\n", test2());
+    // printf("%f\n", test3());
+    err();
 }
