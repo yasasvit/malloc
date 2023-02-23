@@ -1,10 +1,16 @@
 Names: Pratyoy Biswas, Yasasvi Tallapaneni
 NetIDs: pb600, yt397
 
-# Error Handling
+TEST PLAN:
 
+ERROR HANDLING:
+1. If the size provided to mymalloc is nonpositive or too large, the error message provided is "ERROR: Requests for invalid memory amount".
+2. If there is not enough available memory for mymalloc, the error message provided is "ERROR: Not enough memory available".
+3. If there is nothing to free at the given pointer in myfree, the error message provided is "ERROR: Unable to free from file".
+Each error message also prints the file name and line number.
+In the case of an error, the program prints the error message and then immediately terminates.
 
-# Performance Testing    
+PERFORMANCE TESTING:
 Stress Test 1:
 1. Initialize char * array of size 3000 
 2. Initialize a variable size which keeps track of total amount of memory allocated and variable 
