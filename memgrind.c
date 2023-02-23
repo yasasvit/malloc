@@ -154,7 +154,7 @@ int main() {
     for (int i = 0; i < 50; i++) {
         double testtime = test1();
         totaltime += testtime;
-        // printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %d: %.6f s\n", (i+1), testtime);
     }
     printf("Average Time: %.6f s\n", totaltime/50.0);
     totaltime = 0.0;
@@ -162,7 +162,7 @@ int main() {
     for (int i = 0; i < 50; i++) {
         double testtime = test2();
         totaltime += testtime;
-        // printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %d: %.6f s\n", (i+1), testtime);
     }
     printf("Average Time: %.6f s\n", totaltime/50.0);
     totaltime = 0.0;
@@ -170,7 +170,7 @@ int main() {
     for (int i = 0; i < 50; i++) {
         double testtime = test3();
         totaltime += testtime;
-        // printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %d: %.6f s\n", (i+1), testtime);
     }
     printf("Average Time: %.6f s\n", totaltime/50.0);
     totaltime = 0.0;
@@ -180,7 +180,7 @@ int main() {
     for (int i = 0; i < 50; i++) {
         double testtime = stressTest1();
         totaltime += testtime;
-        // printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %d: %.6f s\n", (i+1), testtime);
     }
     printf("Average Time: %.6f s\n", totaltime/50.0);
     totaltime = 0.0;
@@ -188,7 +188,7 @@ int main() {
     for (int i = 0; i < 50; i++) {
         double testtime = stressTest2();
         totaltime += testtime;
-        // printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %d: %.6f s\n", (i+1), testtime);
     }
     printf("Average Time: %.6f s\n", totaltime/50.0);
 
