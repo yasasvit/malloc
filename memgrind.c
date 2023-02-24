@@ -115,82 +115,51 @@ double stressTest2() {
     return (((double) cl) / CLOCKS_PER_SEC); 
 }
 
-int err() {
-    int x, *p, *q;
-    int test = 4;
-    
-    switch (test) {
-    default:
-        puts("Missing or invalid test number");
-        return EXIT_FAILURE;
-    
-    case 1:
-        free(&x);
-        break;
-    case 2:
-        p = (int *) malloc(sizeof(int) * 10);
-        free(p + 1);
-        break;
-    
-    case 3:
-        p = (int *) malloc(sizeof(int) * 10);
-        free(p);
-        free(p);
-        break;
-
-    case 4:
-        p = (int *) malloc(sizeof(int) * 1000);
-        q = (int *) malloc(sizeof(int) * 1000);
-        free(p);
-        free(q);
-    }
-    
-    return EXIT_SUCCESS;
-
-}
-
-int main() {
+int main(int argc, char** argv) {
+    printf("Performance Test #1\n");
     double totaltime = 0.0;
     for (int i = 0; i < 50; i++) {
         double testtime = test1();
         totaltime += testtime;
-        printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %02d: %.6f s\n", (i+1), testtime);
     }
-    printf("Average Time: %.6f s\n", totaltime/50.0);
+    printf("Average: %.6f s\n\n", totaltime/50.0);
+    
+    printf("Performance Test #2\n");
     totaltime = 0.0;
-
     for (int i = 0; i < 50; i++) {
         double testtime = test2();
         totaltime += testtime;
-        printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %02d: %.6f s\n", (i+1), testtime);
     }
-    printf("Average Time: %.6f s\n", totaltime/50.0);
+    printf("Average: %.6f s\n\n", totaltime/50.0);
+   
+    printf("Performance Test #3\n");
     totaltime = 0.0;
-
     for (int i = 0; i < 50; i++) {
         double testtime = test3();
         totaltime += testtime;
-        printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %02d: %.6f s\n", (i+1), testtime);
     }
-    printf("Average Time: %.6f s\n", totaltime/50.0);
-    totaltime = 0.0;
-
-    // printf("%d\n", err());
+    printf("Average: %.6f s\n\n", totaltime/50.0);
     
+    printf("Performance Test #4\n");
+    totaltime = 0.0;    
     for (int i = 0; i < 50; i++) {
         double testtime = stressTest1();
         totaltime += testtime;
-        printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %02d: %.6f s\n", (i+1), testtime);
     }
-    printf("Average Time: %.6f s\n", totaltime/50.0);
-    totaltime = 0.0;
+    printf("Average: %.6f s\n\n", totaltime/50.0);
     
+    printf("Performance Test #5\n");
+    totaltime = 0.0;
     for (int i = 0; i < 50; i++) {
         double testtime = stressTest2();
         totaltime += testtime;
-        printf("Test %d: %.6f s\n", (i+1), testtime);
+        printf("Test %02d: %.6f s\n", (i+1), testtime);
     }
-    printf("Average Time: %.6f s\n", totaltime/50.0);
+    printf("Average: %.6f s\n", totaltime/50.0);
 
     return EXIT_SUCCESS;
 }

@@ -12,7 +12,6 @@ static char memory[MEMSIZE]; // all zeros initially
 void print() {
     for (int i = 0; i < 150; i++) {
         printf("%c", memory[i]);
-        
     }
     printf("\n");
 }
@@ -116,7 +115,7 @@ void *mymalloc(size_t size, char *file, int line) {
         } 
    }
    if (ptr == NULL) {
-        printf("ERROR: Requests for invalid memory amount on this file %s from line %d\n", file, line);
+        printf("ERROR: Not enough memory available to complete request on this file %s from line %d\n", file, line);
         return NULL;
    }
 
@@ -164,7 +163,7 @@ void *mymalloc(size_t size, char *file, int line) {
         
 //    }
 
-   printf("ERROR: Not enough memory available on this file %s from line %d\n", file, line);
+   printf("ERROR: Not enough memory available to complete request on this file %s from line %d\n", file, line);
    //exit(1);
    return NULL;
 
@@ -175,7 +174,7 @@ void myfree(void *ptr, char *file, int line) {
     char* end = memory + 4095;
     // ptr points to start of data now
     if (ptr < start || ptr >= end) {
-        printf("ERROR: Unable to free from file %s on line %d\n", file, line);
+        printf("ERROR: Unable to free unallocated pointer on file %s on line %d\n", file, line);
         //exit(1);
         return;
     }
@@ -199,13 +198,13 @@ void myfree(void *ptr, char *file, int line) {
             memcpy(&size, &memory[index + 1], sizeof(short));
             index = (index) + (size + 3);
         } else {
-            printf("ERROR: Unable to free from file %s on line %d\n", file, line);
+            printf("ERROR: Unable to free unallocated pointer on file %s on line %d\n", file, line);
             return;
         }
 
     }
 
-    printf("ERROR: Unable to free from file %s on line %d\n", file, line);
+    printf("ERROR: Unable to free unallocated pointer on file %s on line %d\n", file, line);
     return;
     
 }   
