@@ -1,5 +1,4 @@
 Names: Pratyoy Biswas, Yasasvi Tallapaneni
-NetIDs: pb600, yt397
 
 # Test Plan:
 ## Required Library Properties:
